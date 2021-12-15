@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import NavBar from "./nav/NavBar";
-import { Routes, Route, Navigate } from "react-router";
-import ApplicationViews from "./ApplicationViews";
+import {ApplicationViews} from "./ApplicationViews";
+import { Routes, Route, Navigate} from "react-router";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Nutshell.css";
 
-export const Kennel = () => {
+export const Nutshell = () => {
   const [loggedin, setLoggedin] = useState(false);
 
   const changeState = (bool) => setLoggedin(bool);
-
+  
   if (localStorage.getItem("nutshell_user")) {
     return (
       <>

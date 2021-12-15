@@ -1,2 +1,4 @@
-Attempted import error: 'useNavigate' is not exported from 'react-router'.
-    Am i forgetting to install something here
+controlled component issues, stuff isnt saving when adding new article
+one place says to make form say default value and another says it should be just value
+chain array methods
+in newscard make a function and then "call" it inside the card to get the dates in desecending order, how do i reference the array in my database? is that through context..etc
