@@ -13,7 +13,7 @@ export const MessageProvider = (props) => {
         .then(setMessages)
     }
 
-    const addMessages = messageObj => {
+    const addMessage = messageObj => {
         return fetch("http://localhost:8088/messages", {
             method: "POST",
             headers: {
@@ -21,7 +21,7 @@ export const MessageProvider = (props) => {
             },
             body: JSON.stringify(messageObj)
         })
-        .then(getMessages)
+        .then(response => response.json())
     }
 
     const getMessagesById = (id) => {
@@ -49,7 +49,7 @@ export const MessageProvider = (props) => {
     */
     return (
         <MessageContext.Provider value={{
-            messages, getMessages, addMessages, getMessagesById, updateMessage
+            messages, getMessages, addMessage, getMessagesById, updateMessage
         }}>
             {props.children}
         </MessageContext.Provider>

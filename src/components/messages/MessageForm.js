@@ -5,97 +5,76 @@ import { UserContext } from "../User/userProvider";
 
 
 export const MessageForm = () => {
-  const { addMessage, updateMessage, getMessageById, getMessages, singleMessage, constructNewMessage } = useContext(MessageContext)
+    const { addMessage } = useContext(MessageContext)
+    const { messages, getMessages } = useContext(MessageContext)
 
-  const { user } = useContext(UserContext)
 
-  //for edit, hold on to state of animal in this view
-  const [message, setMessage] = useState({});
-  //wait for data before button is active
-  const [isLoading, setIsLoading] = useState(true);
+    /*
+    With React, we do not target the DOM with `document.querySelector()`. Instead, our return (render) reacts to state or props.
 
-  const { messageId } = useParams();
-  const navigate = useNavigate();
+    Define the intial state of the form inputs with useState()
+    */
 
-  //when field changes, update state. This causes a re-render and updates the view.
-  //Controlled component
-  const handleControlledInputChange = (event) => {
-    //When changing a state object or array,
-    //always create a copy make changes, and then set state.
-    const newMessage = { ...message }
-    //animal is an object with properties.
-    //set the property to the new value
-    newMessage[event.target.id] = event.target.value
-    //update state
-    setMessage(newMessage)
-  }
+    const [message, setMessage] = useState({
+      userId: "",
+      message: ""
+      
+    });
 
-  const handleSaveMessage = () => {
-      //disable the button - no extra clicks
-      setIsLoading(true);
-      if (messageId) {
-        //PUT - update
-        updateMessage({
-          id: message.id,
-          name: user.name
-          
-        })
-          .then(() => navigate(`/message/detail/${message.id}`))
-      } else {
-        //POST - add
-        addMessage ({
-            id: message.id,
-            name: user.name
-          
-        })
-          .then(() => navigate("/message"))
-      }
-    }
-  
+    const navigate = useNavigate();
 
-  // Get customers and locations. If animalId is in the URL, getAnimalById
-  useEffect(() => {
-    getMessages().then(() => {
-      if (messageId) {
-        getMessageById(messageId)
-          .then(message => {
-            setMessage(message)
-            setIsLoading(false)
-          })
-      } else {
-        setIsLoading(false)
-      }
-    })
-  }, [])
+    /*
+    Reach out to the world and get customers state
+    and locations state on initialization.
+    */
+    useEffect(() => {
+      getMessages()
+    }, [])
 
-  //since state controlls this component, we no longer need
-  //useRef(null) or ref
-
-  return (
-    
-    <form className="messageForm">
-      <h2 className="message__title">Edit Message</h2>
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="name">Message: </label>
-          <input type="text" name="message" required autoFocus className="form-control"
-            proptype="varchar"
-            placeholder="News Title"
-            defaultValue={singleMessage.message}
-            onChange={handleControlledInputChange}
-          />
-        </div>
-      </fieldset>
-     
-      <button type="submit"
-        onClick={evt => {
-          evt.preventDefault()
-          constructNewMessage()
-        }}
-        className="btn btn-primary">
-        Save Changes
-      </button>
-    </form>
-  )
+    //when a field changes, update state. The return will re-render and display based on the values in state
+    //Controlled component
+    const handleControlledInputChange = (event) => {
+      /* When changing a state object or array,
+      always create a copy, make changes, and then set state.*/
+      const newMessage = { ...message }
+      /* Animal is an object with properties.
+      Set the property to the new value
+      using object bracket notation. */
+      newMessage[event.target.id] = event.target.value
+      // update state
+      setMessage(newMessage)
     }
 
+    const handleClickSaveMessages = (event) => {
+      event.preventDefault() //Prevents the browser from submitting the form
+
+      const MessageId = parseInt(message.MessageId)
+      
+
+      if (MessageId === 0) {
+        window.alert("Please type a message")
+      } else {
+        //invoke addAnimal passing animal as an argument.
+        //once complete, change the url and display the animal list
+        addMessage(message)
+        .then(() => navigate("/messages"))
+      }
+    }
+
+    return (
+      <form className="animalForm">
+          
+          <fieldset>
+              <div className="form-group">
+                  <label htmlFor="message"></label>
+                  <input type="text" id="message" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="add message" value={message.message}/>
+              </div>
+          </fieldset>
+          
+          <button className="btn btn-primary"
+            onClick={handleClickSaveMessages}>
+            Send Message
+          </button>
+      </form>
+    )
+}

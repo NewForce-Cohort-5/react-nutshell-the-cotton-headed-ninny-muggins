@@ -14,16 +14,15 @@ export const MessageList = () => {
     
     getMessages()
 
+    
   }, [])
 
   const navigate = useNavigate()
 
   return (
     <>
-      <h2>Messages</h2>
-      <button onClick={() => { navigate("create") }}>
-        Add Message
-      </button>
+      <h5>Messages</h5>
+      
       <div className="messages">
         {
           <div className="messages">
