@@ -31,14 +31,14 @@ export const NewsForm = () => {
     }
 
     const handleSaveNews = () => {
-        if (parseInt(news.title) === "") {
+        if (news.title === "") {
             window.alert("Please select an article")
         } else {
             setIsLoading(true);
             if (newsId){
                 updateNews({
                     userId: +localStorage.getItem("nutshell_user"),
-                    id: news.id,
+                    id: +news.id,
                     title: news.title,
                     synopsis: news.synopsis,
                     url: news.url,
@@ -78,24 +78,24 @@ export const NewsForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="newsName">Article Title:</label>
-                    <input type="text" name="title" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="article name" defaultvalue={news.title}/>
+                    <input type="text" name="title" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="article name" defaultValue={news.title}/>
                 </div>
             </fieldset>
             <fieldset>
             <div className="form-group">
               <label htmlFor="synopsis">synopsis:</label>
-              <input type="text" name="synopsis" onChange={handleControlledInputChange} className="form-control" placeholder="synopsis" defaultvalue={news.synopsis}/>
+              <input type="text" name="synopsis" onChange={handleControlledInputChange} className="form-control" placeholder="synopsis" defaultValue={news.synopsis}/>
               </div>
             </fieldset>
           <fieldset>
             <div className="form-group">
               <label htmlFor="url">url:</label>
-              <input type="text" name="url" onChange={handleControlledInputChange} className="form-control" placeholder="url" defaultvalue={news.url}/></div>
+              <input type="text" name="url" onChange={handleControlledInputChange} className="form-control" placeholder="url" defaultValue={news.url}/></div>
           </fieldset>
           <fieldset>
             <div className="form-group">
               <label htmlFor="date">Date:</label>
-              <input type="date" name="date" onChange={handleControlledInputChange} className="form-control" placeholder="date" defaultvalue={news.date}/></div>
+              <input type="date" name="date" onChange={handleControlledInputChange} className="form-control" placeholder="date" defaultValue={news.date}/></div>
           </fieldset>
           <button className="btn btn-primary"
             disabled={isLoading}
@@ -103,7 +103,7 @@ export const NewsForm = () => {
               event.preventDefault() 
               handleSaveNews()
             }}>
-          {newsId ? <>Save Article</> : <>Save Article</>}</button>
+          {newsId ? <>Edit Article</> : <>Save Article</>}</button>
         </form>
       )
   }
