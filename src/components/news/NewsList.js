@@ -16,14 +16,14 @@ export const NewsList = () => {
     
     return (
         <>
-          <h1>News</h1>
+          <h1 className="NewsHeader">News</h1>
       
           <button onClick={() => navigate("/news/create")}>
                       Add Article
                   </button>
           <div className="news">
-            {
-              news.map(news => {
+          {console.log(news.sort((a,b) => new Date(a.date) - new Date(b.date)))}
+            { news.sort((a,b) => new Date(a.date) - new Date(b.date)).map(news => {
                 return <NewsCard key={news.id} news={news}/>
               })
             }

@@ -20,7 +20,7 @@ export const NewsCard = ({ news }) => {
         <div className="news-title">{news.title}</div>
         <div className="news-synopsis">{news.synopsis}</div>
         <div className="news-url">{news.url}</div>
-        <div className="date">Date of the article saved: {moment().format('MMMM Do YYYY, h:mm:ss a')}
+        <div className="date">Date of the article saved: {moment(news.date).format('MMMM Do YYYY, h:mm:ss a')}
         </div>
     </section>
 )}
