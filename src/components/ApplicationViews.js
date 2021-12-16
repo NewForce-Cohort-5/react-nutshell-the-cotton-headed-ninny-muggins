@@ -1,55 +1,21 @@
-import { Route } from "react-router-dom";
-import React, { Component } from "react";
+import { Route, Routes } from "react-router-dom";
+import React from "react";
+import { MessageList } from "./messages/messageList";
+import { MessageProvider } from "./messages/messageDataProvider";
+import { MessageForm } from "./messages/MessageForm"
+import { MessageEditForm } from "./messages/MessageEditFrom";
+export const ApplicationViews = () => {
+  return (
+     <MessageProvider>
+    <Routes>
+     
+      <Route path="messages/*" element={<> <MessageList/> <MessageForm/> </> } />
+      <Route path="messages/edit/:messageId/*" element={<MessageEditForm />} />
 
-export default class ApplicationViews extends Component {
+        <Route path="/" element= {<p> word </p>} />
+      
+    </Routes>
+    </MessageProvider>
 
-  render() {
-    return (
-      <React.Fragment>
-
-        <Route
-          exact path="/" render={props => {
-            return null
-            // Remove null and return the component which will show news articles
-          }}
-        />
-
-        <Route
-          exact path="/register" render={props => {
-            return null
-            // Remove null and return the component which will handle user registration
-          }}
-        />
-
-        <Route
-          path="/friends" render={props => {
-            return null
-            // Remove null and return the component which will show list of friends
-          }}
-        />
-
-        <Route
-          path="/messages" render={props => {
-            return null
-            // Remove null and return the component which will show the messages
-          }}
-        />
-
-        <Route
-          path="/tasks" render={props => {
-            return null
-            // Remove null and return the component which will show the user's tasks
-          }}
-        />
-
-        <Route
-          path="/events" render={props => {
-            return null
-            // Remove null and return the component which will show the user's events
-          }}
-        />
-
-      </React.Fragment>
-    );
-  }
+  )
 }
