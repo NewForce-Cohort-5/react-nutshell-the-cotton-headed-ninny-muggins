@@ -6,7 +6,7 @@ import "./Event.css"
 import {  useParams, useNavigate } from 'react-router-dom';
 
 export const EventsForm = () => {
-    const { addEvent, getEventById, updateEvent } = useContext(EventContext)
+    const { addEvent, getEventById, updateEvent, getEvents } = useContext(EventContext)
     
 
     /*
@@ -27,26 +27,32 @@ export const EventsForm = () => {
 
     const handleControlledInputChange = (event) => {
       const newEvent = { ...event } 
-      newEvent[event.target.id] = event.target.value
+      newEvent[event.target.name] = event.target.value
       setEvent(newEvent)
     }
     
     const handleSaveEvent = () => {
-      if (parseInt(event.locationId) === 0 || parseInt(event.customerId) === 0){
+      if (parseInt(event.locationId) === 0) {
         window.alert("Please select a location")
       } else {
         setIsLoading(true);
         if(EventId){
           updateEvent({
-            id : event.id,
+            id : +event.id,
             name: event.name,
+            date: event.eventDate,
+            location: event.eventLocation,
+            userId: +localStorage.getItem("nutshell_user")
             
           })
           .then(() => navigate(`/events/detail/${event.id}`))
         } else {
           //Post Add
           addEvent({
-            name: event.name,
+            name: event.name,            
+            date: event.eventDate,
+            location: event.eventLocation,
+            userId: +localStorage.getItem("nutshell_user")
             
           })
           .then(() => navigate("/events"))
@@ -55,7 +61,7 @@ export const EventsForm = () => {
     }
 
     useEffect(() => {
-        getEvents().then(getLocations).then(() =>{
+        
         if(EventId){
           getEventById(EventId)
           .then(event => {
@@ -65,7 +71,7 @@ export const EventsForm = () => {
         } else {
           setIsLoading(false)
         }
-      })
+     
     }, [])
 
    
@@ -95,17 +101,14 @@ export const EventsForm = () => {
             </div>
               </fieldset>
 
-          <fieldset>
-              <div className="form-group">
-                  <label htmlFor="location">Location: </label>
-                  <select defaultValue={event.locationId} name="locationId" id="locationId" className="form-control" onChange={handleControlledInputChange} >
-                      <option value="0">Location: </option>
-                      {locations.map(l => (
-                          <option key={l.id} value={l.id}>{l.name} </option>
-                      ))}
-                  </select>
-              </div>
+              <fieldset>
+            <div className="form-group">
+              <label htmlFor="url">location:</label>
+              <input type="text" name="eventLocation" onChange={handleControlledInputChange} className="form-control" placeholder="url" defaultValue={event.eventLocation}/></div>
           </fieldset>
+
+          
+         
          
           <button className="btn btn-primary"
           disabled ={isLoading}

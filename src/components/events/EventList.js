@@ -20,27 +20,18 @@ export const EventList = () => {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (searchTerms !== "") {
-          // If the search field is not blank, display matching animals
-          const subset = events.filter(event => event.name.toLowerCase().includes(searchTerms))
-          setFiltered(subset)
-        } else {
-          // If the search field is blank, display all animals
-          setFiltered(events)
-        }
-      }, [searchTerms, events])
+    
 
       return (
         <>
           <h1>Events</h1>
     
           <button onClick={() => navigate("/events/create")}>
-              Make Reservation
+              Create Event
           </button>
           <div className="events">
           {
-            filteredevents.map(event => {
+            events.map(event => {
               return <Event key={event.id} event={event} />
             })
           }
