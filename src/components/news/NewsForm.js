@@ -11,6 +11,7 @@ export const NewsForm = () => {
         title: "",
         synopsis: "",
         url: "",
+        date: ""
         })
 
 
@@ -41,6 +42,7 @@ export const NewsForm = () => {
                     title: news.title,
                     synopsis: news.synopsis,
                     url: news.url,
+                    date: news.date
                     
                 })
                 .then(() => navigate(`/news/detail/${news.id}`))
@@ -50,6 +52,7 @@ export const NewsForm = () => {
                     title: news.title,
                     synopsis: news.synopsis,
                     url: news.url,
+                    date: news.date
                     
             })
             .then(() => navigate("/news"))
@@ -89,18 +92,18 @@ export const NewsForm = () => {
               <label htmlFor="url">url:</label>
               <input type="text" name="url" onChange={handleControlledInputChange} className="form-control" placeholder="url" defaultvalue={news.url}/></div>
           </fieldset>
-          {/* <fieldset>
+          <fieldset>
             <div className="form-group">
               <label htmlFor="date">Date:</label>
-              <input type="date" name="url" onChange={handleControlledInputChange} className="form-control" placeholder="date" defaultvalue={news.date}/></div>
-          </fieldset> */}
+              <input type="date" name="date" onChange={handleControlledInputChange} className="form-control" placeholder="date" defaultvalue={news.date}/></div>
+          </fieldset>
           <button className="btn btn-primary"
             disabled={isLoading}
             onClick={event => {
               event.preventDefault() 
               handleSaveNews()
             }}>
-          {newsId ? <>Save Article</> : <>Add Article</>}</button>
+          {newsId ? <>Save Article</> : <>Save Article</>}</button>
         </form>
       )
   }

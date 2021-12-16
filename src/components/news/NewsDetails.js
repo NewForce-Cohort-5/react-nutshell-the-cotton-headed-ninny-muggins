@@ -29,6 +29,7 @@ export const NewsDetails = () => {
     <section className="News">
       <h3 className="news__title">{news.title}</h3>
       <div className="news__location">Synopsis: {news.synopsis}</div>
+      <div className="news__date">Date: {news.date}</div>
       <button onClick={newsDelete}>Delete Article</button>
       <button onClick={() => {navigate(`/news/edit/${news.id}`)}}>Edit</button>
     </section>
