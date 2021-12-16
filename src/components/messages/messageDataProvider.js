@@ -7,7 +7,7 @@ export const MessageContext = createContext()
 export const MessageProvider = (props) => {
     const [messages, setMessages] = useState([])
 
-    const getMessages = () => {
+    const getMessage = () => {
         return fetch("http://localhost:8088/messages")
         .then(res => res.json())
         .then(setMessages)
@@ -24,7 +24,7 @@ export const MessageProvider = (props) => {
         .then(response => response.json())
     }
 
-    const getMessagesById = (id) => {
+    const getMessageById = (id) => {
         return fetch(`http://localhost:8088/messages/${id}`)
             .then(res => res.json())
     }
@@ -38,7 +38,7 @@ export const MessageProvider = (props) => {
           },
           body: JSON.stringify(message)
         })
-          .then(getMessages)
+          .then(getMessage)
       }
       
     /*
@@ -49,7 +49,7 @@ export const MessageProvider = (props) => {
     */
     return (
         <MessageContext.Provider value={{
-            messages, getMessages, addMessage, getMessagesById, updateMessage
+            messages, getMessage, addMessage, getMessageById, updateMessage
         }}>
             {props.children}
         </MessageContext.Provider>

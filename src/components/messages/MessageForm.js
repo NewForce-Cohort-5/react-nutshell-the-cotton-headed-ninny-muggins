@@ -6,12 +6,11 @@ import { UserContext } from "../User/userProvider";
 
 export const MessageForm = () => {
     const { addMessage } = useContext(MessageContext)
-    const { messages, getMessages } = useContext(MessageContext)
+    const { messages, getMessage } = useContext(MessageContext)
 
 
 
-    const [isLoading, setIsLoading] = useState(true);
-
+   
 
     const [message, setMessage] = useState({
         
@@ -55,7 +54,7 @@ export const MessageForm = () => {
             //invoke addAnimal passing animal as an argument.
             //once complete, change the url and display the animal list
             addMessage(message)
-                .then(() => getMessages())
+                .then(() => getMessage())
                 .then(() => setMessage({
                     userId: parseInt(localStorage.getItem("NutShell_User")),
                     message: ""
@@ -65,7 +64,7 @@ export const MessageForm = () => {
     }
 
     useEffect(() => {
-        getMessages()
+        getMessage()
     }, [])
 
 
@@ -83,6 +82,7 @@ export const MessageForm = () => {
                 onClick={handleClickSaveMessages}>
                 Send Message
             </button>
+            
         </form>
     )
 }

@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom"
 
 export const MessageList = () => {
   // This state changes when `getAnimals()` is invoked below
-  const { messages, getMessages, addMessages, editMessages } = useContext(MessageContext)
+  const { messages, getMessage, addMessages, editMessages } = useContext(MessageContext)
   
 
   //useEffect - reach out to the world for something
   useEffect(() => {
     console.log("MessageList: useEffect - getMessages")
     
-    getMessages()
+    getMessage()
 
     
   }, [])
