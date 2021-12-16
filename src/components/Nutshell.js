@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import NavBar from "./nav/NavBar";
 import {ApplicationViews} from "./ApplicationViews";
 import { Routes, Route, Navigate} from "react-router";
-import { Login } from "./auth/Login";
-import { Register } from "./auth/Register";
+import { Login } from "./auth/login";
+import { Register } from "./auth/register";
 import "./Nutshell.css";
 
 export const Nutshell = () => {
@@ -28,6 +28,3 @@ export const Nutshell = () => {
     );
   }
 };
-
-
-
