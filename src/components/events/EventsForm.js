@@ -15,44 +15,49 @@ export const EventsForm = () => {
     Define the intial state of the form inputs with useState()
     */
 
-    const [event, setEvent] = useState({
-      
+    const [eventState, setEventState] = useState({
+        userId: +localStorage.getItem("NutShell_User"),
+        eventName: "",
+        eventDate: "",
+        eventLocation: ""
+        
     })
 
     
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const {EventId} = useParams();
+    const {eventId} = useParams();
     const navigate = useNavigate();
 
     const handleControlledInputChange = (event) => {
-      const newEvent = { ...event } 
-      newEvent[event.target.name] = event.target.value
-      setEvent(newEvent)
+      const newEventState = { ...eventState } 
+      newEventState[event.target.name] = event.target.value
+      setEventState(newEventState)
     }
     
     const handleSaveEvent = () => {
-      if (parseInt(event.locationId) === 0) {
+      if (parseInt(eventState.locationId) === 0) {
         window.alert("Please select a location")
       } else {
         setIsLoading(true);
-        if(EventId){
+      
+        if(eventId){
           updateEvent({
-            id : +event.id,
-            name: event.name,
-            date: event.eventDate,
-            location: event.eventLocation,
-            userId: +localStorage.getItem("nutshell_user")
+            id : +eventState.id,
+            eventName: eventState.eventName,
+            eventDate: eventState.eventDate,
+            eventLocation: eventState.eventLocation,
+            userId: +localStorage.getItem("NutShell_User")
             
           })
-          .then(() => navigate(`/events/detail/${event.id}`))
+          .then(() => navigate(`/events/detail/${eventState.id}`))
         } else {
           //Post Add
           addEvent({
-            name: event.name,            
-            date: event.eventDate,
-            location: event.eventLocation,
-            userId: +localStorage.getItem("nutshell_user")
+            eventName: eventState.eventName,            
+            eventDate: eventState.eventDate,
+            eventLocation: eventState.eventLocation,
+            userId: +localStorage.getItem("NutShell_User")
             
           })
           .then(() => navigate("/events"))
@@ -62,10 +67,10 @@ export const EventsForm = () => {
 
     useEffect(() => {
         
-        if(EventId){
-          getEventById(EventId)
+        if(eventId){
+          getEventById(eventId)
           .then(event => {
-            setEvent(event)
+            setEventState(event)
             setIsLoading(false)
           })
         } else {
@@ -82,20 +87,20 @@ export const EventsForm = () => {
           <fieldset>
               <div className="form-group">
                   <label htmlFor="name">Event name:</label>
-                  <input type="text" id="name" 
+                  <input type="text" name="eventName" 
                   onChange={handleControlledInputChange} required autoFocus className="form-control"
                   placeholder="Event Name" 
-                  defaultValue={event.name}/>
+                  defaultValue={eventState.eventName}/>
               </div>
           </fieldset>
 
           <fieldset>
           <div className="form-group">
-            <label htmlFor="Eventdate"> Date:</label>
-            <input type = "date" id= "date" required className="form-control" 
+            <label htmlFor="date"> Date:</label>
+            <input type = "date" name="eventDate" required className="form-control" 
             placeholder= "Date of Event"
             onChange={handleControlledInputChange}
-            defaultValue={event.eventDate} ></input> 
+            defaultValue={eventState.eventDate} ></input> 
 
 
             </div>
@@ -104,7 +109,7 @@ export const EventsForm = () => {
               <fieldset>
             <div className="form-group">
               <label htmlFor="url">location:</label>
-              <input type="text" name="eventLocation" onChange={handleControlledInputChange} className="form-control" placeholder="url" defaultValue={event.eventLocation}/></div>
+              <input type="text" name="eventLocation" onChange={handleControlledInputChange} className="form-control" placeholder="Location" defaultValue={eventState.eventLocation}/></div>
           </fieldset>
 
           

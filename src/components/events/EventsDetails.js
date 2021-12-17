@@ -32,7 +32,7 @@ export const EventDetails = () => {
 
   return (
     <section className="animal">
-      <h3 className="event__name">{event.name}</h3>
+      <h3 className="event__name">{event.eventName}</h3>
       <div className="event__breed">{event.eventDate}</div>      
       <div className="event__location">Location: {event.eventLocation}</div>
     <button onClick={handleRelease}>Delete Event</button>

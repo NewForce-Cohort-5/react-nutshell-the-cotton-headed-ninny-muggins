@@ -2,7 +2,10 @@ import React from "react"
 import "./Event.css"
 
 
-export const Event = ({ event }) => (
+export const Event = ({ event }) => {
+    if (event.userId === +localStorage.activeUser){
+    }
+    return (
     <section className="event">
         {/* <h3 className="animal__name">{animal.name}</h3> */}
         <div className="event__id">{event.id}</div>
@@ -13,4 +16,4 @@ export const Event = ({ event }) => (
         
         
     </section>
-)
+)}
