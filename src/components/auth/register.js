@@ -36,7 +36,7 @@ export const Register = (props) => {
                         .then(res => res.json())
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("nutshell_users", createdUser.id)
+                                localStorage.setItem("NutShell_User", createdUser.id)
                                 props.setLoggedin(true)
                                 navigate("/")
                             }

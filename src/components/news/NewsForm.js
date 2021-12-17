@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { NewsContext } from "./NewsProvider"
 import { useNavigate, useParams }  from 'react-router-dom';
-import { Moment } from "moment";
+// import { Moment } from "moment";
 
 export const NewsForm = () => {
     const { addNews, updateNews, getNewsById } = useContext(NewsContext)

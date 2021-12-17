@@ -22,7 +22,7 @@ export const Login = (props) => {
         existingUserCheck()
             .then(exists => {
                 if (exists) {
-                    localStorage.setItem("nutshell_user", exists.id)
+                    localStorage.setItem("NutShell_User", exists.id)
                     props.setLoggedin(true)
                     navigate("/") // change to navigate("/")
                 } else {
