@@ -4,12 +4,6 @@ import "./News.css"
 import moment from "moment";
 
 
-// const sortedArray = news.date.sort((a, b) => a.diff(b))
-// 
-//filter
-
-
-
 export const NewsCard = ({ news }) => {
     if (news.userId === +localStorage.activeUser){
     }
