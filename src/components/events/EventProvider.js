@@ -7,7 +7,11 @@ export const EventProvider = (props) => {
 
     
     const [events, setEvents] = useState([])
-    
+
+    const getEventById = (id) => {
+      return fetch(`http://localhost:8088/events/${id}?`)
+          .then(res => res.json())
+    }
 
     const getEvents = () => {
         return fetch("http://localhost:8088/events?_expand=location")
@@ -37,13 +41,13 @@ export const EventProvider = (props) => {
             .then(getEvents)
     }
 
-    const updateEvent = eventId => {
-        return fetch(`http://localhost:8088/animals/${eventId}`, {
+    const updateEvent = event => {
+        return fetch(`http://localhost:8088/events/${event.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(events)
+          body: JSON.stringify(event)
         })
           .then(getEvents)
       }
@@ -57,7 +61,7 @@ export const EventProvider = (props) => {
         return (
             <EventContext.Provider value={
               {
-              events, addEvent, getEvents, updateEvent, deleteEvent
+              events, addEvent, getEvents, updateEvent, deleteEvent, getEventById
               }
             }>
               {props.children}
