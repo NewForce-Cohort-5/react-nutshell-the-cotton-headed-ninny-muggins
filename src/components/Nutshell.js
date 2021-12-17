@@ -11,7 +11,7 @@ export const Nutshell = () => {
 
   const changeState = (bool) => setLoggedin(bool);
   
-  if (localStorage.getItem("nutshell_user")) {
+  if (localStorage.getItem("NutShell_User")) {
     return (
       <>
         <NavBar />

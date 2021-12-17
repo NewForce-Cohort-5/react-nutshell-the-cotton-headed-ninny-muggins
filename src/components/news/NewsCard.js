@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"
 import "./News.css"
-import moment from "moment";
+// import moment from "moment";
 
 
 export const NewsCard = ({ news }) => {
@@ -14,8 +14,8 @@ export const NewsCard = ({ news }) => {
         <div className="news-title">{news.title}</div>
         <div className="news-synopsis">{news.synopsis}</div>
         <div className="news-url">{news.url}</div>
-        <div className="dates">Date of the article saved: {moment(news.date).format('MMMM Do YYYY')}
-        </div>
+        {/* <div className="dates">Date of the article saved: {moment(news.date).format('MMMM Do YYYY')} */}
+        {/* </div> */}
     </section>
 )}
 
