@@ -5,7 +5,10 @@ import {Nutshell} from './components/Nutshell'
 import './index.css'
 
 ReactDOM.render(
-  <Router>
-      <Nutshell />
-  </Router>
-  , document.getElementById('root'))
+  <React.StrictMode>
+      <Router>
+        <Nutshell />
+      </Router>
+  </React.StrictMode>,
+  document.getElementById("root")
+)

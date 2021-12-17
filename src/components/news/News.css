@@ -1,0 +1,18 @@
+.newsForm{
+    /* border: 1px solid black; */
+    width: fit-content;
+
+}
+
+.news{
+    border: 1px solid black;
+    width: 50em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
