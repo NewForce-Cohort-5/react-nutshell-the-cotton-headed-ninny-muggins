@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "./nav/NavBar";
 import {ApplicationViews} from "./ApplicationViews";
-import { Routes, Route, Navigate} from "react-router";
+import { Routes, Route, Navigate} from "react-router-dom";
 import { Login } from "./auth/login";
 import { Register } from "./auth/register";
 import "./Nutshell.css";
